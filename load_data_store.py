@@ -1,6 +1,8 @@
 import streamlit as st
 from dotenv import load_dotenv
 
+from admin_utlis import *
+
 
 def main():
     load_dotenv()
@@ -10,19 +12,22 @@ def main():
     pdf = st.file_uploader("Only PDF files allowed", type=["pdf"])
 
     if pdf is not None:
-        with st.spinner('Wait for it...'):
-            # read pdf function
+        with st.spinner('uploading...'):
+            text=read_pdf_data(pdf)
             st.write("👉Reading PDF done")
 
             # Create chunks
+            docs_chunks=split_data(text)
+            #st.write(docs_chunks)
             st.write("👉Splitting data into chunks done")
 
             # Create the embeddings
+            embeddings=create_embeddings_load_data()
             st.write("👉Creating embeddings instance done")
 
             # Build the vector store (Push the PDF data embeddings)
+            push_to_pinecone("gcp-starter","test-index",embeddings,docs_chunks)
 
-        st.success("Successfully uploaded the embeddings to Pinecone")
 
 
 if __name__ == '__main__':

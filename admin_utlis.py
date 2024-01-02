@@ -1,3 +1,4 @@
+import os
 from pypdf import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
@@ -25,10 +26,10 @@ def create_embeddings_load_data():
     # embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
     return embeddings
 
-def push_to_pinecone(pinecone_apikey,pinecone_environment,pinecone_index_name,embeddings,docs):
+def push_to_pinecone(pinecone_environment,pinecone_index_name,embeddings,docs):
 
     pinecone.init(
-    api_key=pinecone_apikey,
+    api_key=os.environ['PINECONE_API_KEY'],
     environment=pinecone_environment
     )
 
