@@ -1,6 +1,6 @@
 import streamlit as st
 
-from admin_utlis import *
+from pages.admin_utlis import *
 
 
 def main():

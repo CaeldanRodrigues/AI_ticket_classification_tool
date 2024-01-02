@@ -25,7 +25,6 @@ def create_embeddings():
     # embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
     return embeddings
 
-#This function will help us in fetching the top relevent documents from our vector store - Pinecone Index
 def get_similar_docs(index,query,k=2):
 
     similar_docs = index.similarity_search(query, k=k)

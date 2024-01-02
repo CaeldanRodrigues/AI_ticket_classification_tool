@@ -10,11 +10,11 @@ def main():
     user_input = st.text_input("🔍")
 
     if user_input:
-        embeddings=create_embeddings()
-        index=pull_from_pinecone("gcp-starter","test-index",embeddings)
-        relavant_docs=get_similar_docs(index,user_input)
+        embeddings = create_embeddings()
+        index = pull_from_pinecone("gcp-starter","test-index",embeddings)
+        relavant_docs = get_similar_docs(index,user_input)
 
-        response=get_answer(relavant_docs,user_input)
+        response = get_answer(relavant_docs,user_input)
         st.write(response)
 
         button = st.button("Submit ticket?")
