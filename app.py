@@ -1,6 +1,6 @@
 import streamlit as st
 
-
+from user_utils import *
 
 def main():
 
@@ -10,7 +10,14 @@ def main():
     user_input = st.text_input("🔍")
 
     if user_input:
-        st.write("👉Processing your question")
+        embeddings=create_embeddings()
+        index=pull_from_pinecone("gcp-starter","test-index",embeddings)
+        relavant_docs=get_similar_docs(index,user_input)
+
+        response=get_answer(relavant_docs,user_input)
+        st.write(response)
+
+        button = st.button("Submit ticket?")
 
 
 if __name__ == '__main__':
